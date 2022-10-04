@@ -1,37 +1,40 @@
 from django.shortcuts import render
 
+from places.models import Location
+
 
 def main(request):
-    geo_data = {
-        "type": "FeatureCollection",
-        "features": [
+    locations = Location.objects.all()
+    print('*' * 50)
+    print('locations =', locations)
+
+    features = []
+    id_count = 1000
+    latitude = 37.62
+    longitude = 55.793676
+    for location in locations:
+        id_count += 1
+        latitude += 0.02
+        longitude -= 0.04
+        features.append(
             {
                 "type": "Feature",
                 "geometry": {
                     "type": "Point",
-                    "coordinates": [37.62, 55.793676]
+                    "coordinates": [latitude, longitude]
                 },
                 "properties": {
-                    "title": "«Легенды Москвы",
-                    "placeId": "moscow_legends",
+                    "title": location.title,
+                    "placeId": id_count,
                     "detailsUrl": "static/places/moscow_legends.json"
                 }
-            },
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [37.64, 55.753676]
-                },
-                "properties": {
-                    "title": "Крыши24.рф",
-                    "placeId": "roofs24",
-                    "detailsUrl": "static/places/roofs24.json"
-                }
             }
-        ]
-    }
+        )
+
     context = {
-        'geo_data': geo_data
+        'geo_data': {
+            "type": "FeatureCollection",
+            "features": features
+        }
     }
     return render(request, 'index.html', context)
