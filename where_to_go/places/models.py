@@ -4,6 +4,8 @@ from django.db import models
 class Location(models.Model):
     title = models.CharField('Название места', max_length=50)
     description = models.TextField('Описание')
+    latitude = models.FloatField('Широта', blank=True, null=True)
+    longtitude = models.FloatField('Долгота', blank=True, null=True)
 
     def __str__(self):
         return self.title

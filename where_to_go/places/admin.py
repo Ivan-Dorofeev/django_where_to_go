@@ -3,9 +3,13 @@ from django.contrib import admin
 from .models import Location, Image
 
 
+class ImagesInline(admin.TabularInline):
+    model = Image
+
+
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
-    list_display = ['title', 'description', ]
+    inlines = [ImagesInline, ]
 
 
 @admin.register(Image)
