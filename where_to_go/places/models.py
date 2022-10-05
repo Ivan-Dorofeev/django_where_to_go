@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import format_html_join, format_html
 
 
 class Location(models.Model):
@@ -18,3 +19,4 @@ class Image(models.Model):
 
     def __str__(self):
         return f'{self.location} = {self.images}'
+
