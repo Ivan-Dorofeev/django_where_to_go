@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import Location, Image
-from adminsortable2.admin import SortableStackedInline, SortableAdminMixin, SortableAdminBase
+from adminsortable2.admin import SortableStackedInline, SortableAdminBase
 
 
-class ImagesInline(admin.TabularInline,SortableStackedInline):
+class ImagesInline(admin.TabularInline, SortableStackedInline):
     model = Image
     readonly_fields = ('image_report',)
 

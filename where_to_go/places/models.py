@@ -1,12 +1,14 @@
 from django.db import models
-from django.utils.html import format_html_join, format_html
+from tinymce.models import HTMLField
+from tinymce import models as tinymce_models
 
 
 class Location(models.Model):
     title = models.CharField('Название места', max_length=50)
-    description = models.TextField('Описание')
+    description = tinymce_models.HTMLField(blank=True, null=True)
     latitude = models.FloatField('Широта', blank=True, null=True)
     longtitude = models.FloatField('Долгота', blank=True, null=True)
+
 
     class Meta:
         ordering = ["title"]
