@@ -1,22 +1,16 @@
-import json
-from pprint import pprint
-
 from django.shortcuts import render
-from django.urls import reverse
-
-from places.models import Location
-
-from places.models import Image
+from places.models import Location, Image
 
 
 def main(request):
     locations = Location.objects.all()
-    images = Image.objects.all()
 
     features = []
     id_count = 1000
     for location in locations:
         id_count += 1
+
+        images = Image.objects.filter(location=location)
         imgs = [img.image.url for img in images]
 
         features.append(

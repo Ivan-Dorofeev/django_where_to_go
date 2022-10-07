@@ -1,13 +1,19 @@
 import os
 from pathlib import Path
 
+from environs import Env
+
+env = Env()
+env.read_env()
+secret_key = env("SECRET_KEY")
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-vm&zsptr%klj8ul&in^2n*y5mw#u2b^0#u$^12gi@wrb2w*u5v'
+SECRET_KEY = secret_key
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -31,6 +37,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+# CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# SECURE_HSTS_PRELOAD = True
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_SECONDS = 3600
 
 ROOT_URLCONF = 'where_to_go.urls'
 
@@ -57,9 +69,7 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+        'NAME': BASE_DIR / 'db.sqlite3', }}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
