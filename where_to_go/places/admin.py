@@ -10,7 +10,7 @@ class ImagesInline(admin.TabularInline, SortableStackedInline):
 
     def image_report(self, obj):
         return format_html('<img src="{url}" width="{width}" height={height} />'.format(
-            url=obj.images.url,
+            url=obj.image.url,
             width=200,
             height=200,
         )

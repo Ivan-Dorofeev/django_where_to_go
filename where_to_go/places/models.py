@@ -5,10 +5,10 @@ from tinymce import models as tinymce_models
 
 class Location(models.Model):
     title = models.CharField('Название места', max_length=50)
-    description = tinymce_models.HTMLField(blank=True, null=True)
+    description = models.CharField('Короткое описание', max_length=500, blank=True, null=True)
+    text = tinymce_models.HTMLField(blank=True, null=True)
     latitude = models.FloatField('Широта', blank=True, null=True)
     longtitude = models.FloatField('Долгота', blank=True, null=True)
-
 
     class Meta:
         ordering = ["title"]
@@ -20,10 +20,10 @@ class Location(models.Model):
 class Image(models.Model):
     location = models.ForeignKey(Location, verbose_name='Локация', related_name='images', on_delete=models.CASCADE,
                                  blank=True, null=True)
-    images = models.ImageField(blank=True, null=True)
+    image = models.ImageField(blank=True, null=True)
 
     def __str__(self):
-        return f'{self.location} - {self.images}'
+        return f'{self.location} - {self.image}'
 
     class Meta:
         ordering = ["location"]
