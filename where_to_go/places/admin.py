@@ -12,9 +12,7 @@ class ImagesInline(admin.TabularInline, SortableStackedInline):
         return format_html('<img src="{url}" width="{width}" height={height} />'.format(
             url=obj.image.url,
             width=200,
-            height=200,
-        )
-        )
+            height=200, ))
 
 
 @admin.register(Location)

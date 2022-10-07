@@ -2,18 +2,24 @@ import json
 
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 
 from places.models import Location
+from places.models import Image
 
 
 def places(request, place_id):
     place = get_object_or_404(Location, id=place_id)
-    context = {'place': place}
+    images = Image.objects.all()
 
-    with open('where_to_go/static/places/locations.json', 'r') as ff:
-        file = json.load(ff)
-    for location in file:
-        if location['title'] == place.title:
-            context = location
-            break
+    context = {
+        "title": place.title,
+        "imgs": [img.image.url for img in images],
+        "description_short": place.description,
+        "description_long": place.text,
+        "coordinates": {
+            "lng": place.longtitude,
+            "lat": place.latitude
+        }
+    }
     return JsonResponse(context, json_dumps_params={'indent': 2, 'ensure_ascii': False})

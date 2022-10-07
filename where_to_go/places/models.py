@@ -1,5 +1,4 @@
 from django.db import models
-from tinymce.models import HTMLField
 from tinymce import models as tinymce_models
 
 
@@ -27,3 +26,4 @@ class Image(models.Model):
 
     class Meta:
         ordering = ["location"]
+
