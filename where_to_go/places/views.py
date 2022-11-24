@@ -20,5 +20,4 @@ def places(request, place_id):
     }
     return JsonResponse(context, json_dumps_params={'indent': 2, 'ensure_ascii': False})
 
-
-# test page
+# test revert
