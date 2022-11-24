@@ -12,11 +12,13 @@ class Location(models.Model):
     class Meta:
         ordering = ["title"]
 
+
     def __str__(self):
         return self.title
 
 
 class Image(models.Model):
+
     location = models.ForeignKey(Location, verbose_name='Локация', related_name='images', on_delete=models.CASCADE,
                                  blank=True, null=True)
     image = models.ImageField(blank=True, null=True)
