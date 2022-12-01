@@ -10,15 +10,13 @@ class Location(models.Model):
     longtitude = models.FloatField('Долгота', blank=True, null=True)
 
     class Meta:
-        ordering = ["title"]
-
+        ordering = ["title", ]
 
     def __str__(self):
         return self.title
 
 
 class Image(models.Model):
-
     location = models.ForeignKey(Location, verbose_name='Локация', related_name='images', on_delete=models.CASCADE,
                                  blank=True, null=True)
     image = models.ImageField(blank=True, null=True)
@@ -27,5 +25,4 @@ class Image(models.Model):
         return f'{self.location} - {self.image}'
 
     class Meta:
-        ordering = ["location"]
-
+        ordering = ["location", ]
