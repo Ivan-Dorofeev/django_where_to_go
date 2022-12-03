@@ -6,7 +6,7 @@ from places.models import Image
 
 def places(request, place_id):
     place = get_object_or_404(Location, id=place_id)
-    images = Image.objects.all()
+    images = Image.objects.filter(location=place)
 
     context = {
         "title": place.title,
@@ -18,4 +18,4 @@ def places(request, place_id):
             "lat": place.latitude
         }
     }
-    return JsonResponse(context, json_dumps_params={'indent': 2, 'ensure_ascii': False})
+    return JsonResponse(context, safe=False, json_dumps_params={'indent': 2, 'ensure_ascii': False})
