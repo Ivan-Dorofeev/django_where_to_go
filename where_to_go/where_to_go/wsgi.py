@@ -8,11 +8,12 @@ https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/
 """
 
 import os
-import sys
 
 from django.core.wsgi import get_wsgi_application
-# import where_to_go.where_to_go.settings
+from whitenoise import WhiteNoise
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'where_to_go.settings')
 
 application = get_wsgi_application()
+application = WhiteNoise(application, root="static")
+# application.add_files("/path/to/more/static/files", prefix="more-files/")
